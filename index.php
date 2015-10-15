@@ -1,5 +1,5 @@
 <?php 
-	include 'modules/auth.php';
+	include 'php_modules/auth.php';
 	include 'html_modules/header.php'; 
 ?>
  
@@ -10,7 +10,7 @@
 				<div style="width: 600px; height:400px">	
 					<?php include_once 'menu.php';?>	
 					
-					<p style='text-align:center;'>Willkommen zum Tippspiel. Wählen Sie aus den in der Menüleiste bereitgestellten Funktionen aus. Viel Spaß und Erfolg beim Tippen.</p>
+					<p style='text-align:center;'>Willkommen auf der PHP-Demo-Seite.</p>
 				</div>	
 			</div>
 		</div>

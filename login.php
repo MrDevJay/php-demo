@@ -1,7 +1,7 @@
 <?php
 	
-	include_once ('modules/config.php');
-	include_once ('modules/db_connection.php');
+	include_once ('php_modules/config.php');
+	include_once ('php_modules/db_connection.php');
 
 	//generals
 	$message = $welcome_message;
@@ -46,7 +46,7 @@
 	<div class="val">
 		<div class="hal">
 			<div>
-				<p class="pheader">Tippspiel</p>
+				<p class="pheader"><?php echo $page_title?></p>
 				<p id="message_text"><?php echo $message?></p>
 				<form action="login.php" method="post">
 	   				<table spacing="10" style="margin:auto;">
