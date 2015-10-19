@@ -3,21 +3,27 @@
 	include_once ('php_modules/config.php');
 	include_once ('php_modules/db_connection.php');
 
+	include_once 'html_modules/header.php';
+	include_once 'html_modules/javascripts.php';
+
 	//generals
-	$message = $welcome_message;
-	
+	if (isset($_GET["message"]) && $_GET["message"]!="")
+		$message = $_GET["message"]; 
+	else 
+		$message = $welcome_message;
 	
 	//login form send
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    	session_start();
 	
 	    $benutzername = $_POST['benutzername'];
 	    $passwort = $_POST['passwort'];
+	    //redirect
 	    $hostname = $_SERVER['HTTP_HOST'];
 	    $path = dirname($_SERVER['PHP_SELF']);
 	
 	    // Benutzername und Passwort werden überprüft
 	    if ($benutzername == 'jan' && $passwort == '123') {
+	    	session_start();
 	    	$_SESSION['nutzer_id'] = 1;
 	    	$_SESSION['angemeldet'] = true;
 	       	// Weiterleitung zur geschützten Startseite
@@ -25,20 +31,16 @@
 	        	if (php_sapi_name() == 'cgi') {
 	         		header('Status: 303 See Other');
 	         	}
-	        else {
-	        	header('HTTP/1.1 303 See Other');
-	        }
-	     }
-	     header('Location: http://'.$hostname.($path == '/' ? '' : $path).'/index.php');
-	     exit;
-	     
+	        	else {
+	        		header('HTTP/1.1 303 See Other');
+	        	}
+	     	}
+	     	header('Location: http://'.$hostname.($path == '/' ? '' : $path).'/index.php');
+	     	exit;
 	     } else{
 	     	$message = "<font style='color: red;'>".$auth_failed_message."</font>";
 	     }
      }
- 
-	include_once 'html_modules/header.php';
-	include_once 'html_modules/javascripts.php';
 ?>
  
 <body>
@@ -51,10 +53,10 @@
 				<form action="login.php" method="post">
 	   				<table spacing="10" style="margin:auto;">
 	   				  <tr>
-   				  		<td align="right">Benutzername:</td><td align="left"><input type="text" name="benutzername" size="25" onclick="setWelcomeMessage('<?php echo $welcome_message?>')"/></td>
+   				  		<td align="right">Benutzername:</td><td align="left"><input type="text" name="benutzername" size="25" onclick="setHeaderMessage('<?php echo $welcome_message?>')"/></td>
 	   				  </tr>
 	   				  <tr>
-   				  		<td align="right">Passwort:</td><td align="left"><input type="password" name="passwort" size="25" onclick="setWelcomeMessage('<?php echo $welcome_message?>')"/></td>
+   				  		<td align="right">Passwort:</td><td align="left"><input type="password" name="passwort" size="25" onclick="setHeaderMessage('<?php echo $welcome_message?>')"/></td>
 	   				  </tr>
 	   				</table>
 	   				<p align="center"><input type="submit" value="Anmelden" /></p>
