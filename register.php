@@ -22,13 +22,13 @@
 	    $path = dirname($_SERVER['PHP_SELF']);
 	
 	    //some verifications
-	    $sql_if_user_exists = "SELECT * from '".$mysql_table_users."' WHERE user='".$benutzername."'";
-	    $user_exists = mysqli_query($mysqli, $sql_if_user_exists);
-	    echo $user_exists;
+	    $sql_user_exists = "SELECT * FROM ".$mysql_table_users." WHERE user='".$benutzername."'";
+	    $user_exists = $mysqli->query($sql_user_exists);
 	    if ($benutzername=="" || $passwort=="" || $passwortWdh=="" || $passwort != $passwortWdh){
 	    	$message = "<font style='color: red;'>".$invalid_registration_message."</font>";
-	    } else if (mysql_num_rows($user_exists) > 0){
+	    } else if ($user_exists->num_rows > 0){
 	    	$message = "<font style='color: red;'>".str_replace("%s", $benutzername, $user_already_exists_message)."</font>";
+	    	$benutzername = "";
 	    } else {
 	    	//create tables if not exist
 	    	$sql_create_table = "CREATE TABLE IF NOT EXISTS ".$mysql_table_users." (
@@ -37,13 +37,13 @@
 				password VARCHAR(40) NOT NULL,
 				reg_date TIMESTAMP,
 	    		unique key (user))";
-	    	if (!mysqli_query($mysqli, $sql_create_table)) {
+	    	if (!$mysqli->query($sql_create_table)) {
 	    		//TODO improve error handling (separate page?)
 	    		die("Error creating database table: " . mysqli_error());
 	    	}
 	    	$passwordHash = sha1(passwort);
 	    	$sql_insert_new_user = "INSERT INTO ".$mysql_table_users." (user, password) VALUES ('".$benutzername."','".$passwordHash."')";
-	    	if (!mysqli_query($mysqli, $sql_insert_new_user)) {
+	    	if (!$mysqli->query($sql_insert_new_user)) {
 	    		//TODO improve error handling (separate page?)
 	    		die("Error inserting new user into database: " . mysqli_error());
 	    	}	 
