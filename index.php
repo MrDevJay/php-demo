@@ -10,7 +10,7 @@
 				<div style="width: 600px; height:400px">	
 					<?php include_once 'menu.php';?>	
 					
-					<p style='text-align:center;'>Willkommen auf der PHP-Demo-Seite.</p>
+					<p style='text-align:center;'>Willkommen auf der PHP-Demo-Seite, <?php echo $_SESSION["user"]?>.</p>
 				</div>	
 			</div>
 		</div>

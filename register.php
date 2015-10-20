@@ -41,7 +41,7 @@
 	    		//TODO improve error handling (separate page?)
 	    		die("Error creating database table: " . mysqli_error());
 	    	}
-	    	$passwordHash = sha1(passwort);
+	    	$passwordHash = sha1($passwort);
 	    	$sql_insert_new_user = "INSERT INTO ".$mysql_table_users." (user, password) VALUES ('".$benutzername."','".$passwordHash."')";
 	    	if (!$mysqli->query($sql_insert_new_user)) {
 	    		//TODO improve error handling (separate page?)

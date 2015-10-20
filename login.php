@@ -21,25 +21,33 @@
 	    $hostname = $_SERVER['HTTP_HOST'];
 	    $path = dirname($_SERVER['PHP_SELF']);
 	
-	    // Benutzername und Passwort werden überprüft
-	    if ($benutzername == 'jan' && $passwort == '123') {
-	    	session_start();
-	    	$_SESSION['nutzer_id'] = 1;
-	    	$_SESSION['angemeldet'] = true;
-	       	// Weiterleitung zur geschützten Startseite
-	       	if ($_SERVER['SERVER_PROTOCOL'] == 'HTTP/1.1') {
-	        	if (php_sapi_name() == 'cgi') {
-	         		header('Status: 303 See Other');
-	         	}
-	        	else {
-	        		header('HTTP/1.1 303 See Other');
-	        	}
-	     	}
-	     	header('Location: http://'.$hostname.($path == '/' ? '' : $path).'/index.php');
-	     	exit;
-	     } else{
-	     	$message = "<font style='color: red;'>".$auth_failed_message."</font>";
-	     }
+	    //some verifications
+	    $sql_get_user = "SELECT id, user, password FROM ".$mysql_table_users." WHERE user='".$benutzername."'";
+	    $result = $mysqli->query($sql_get_user);
+	    if ($benutzername!="" && $passwort!="" && $result->num_rows==1){
+	    	$row = $result->fetch_assoc();
+	    	if ($row["password"] == sha1($passwort)){
+	    		session_start();
+	    		$_SESSION['id'] = $row["id"];
+	    		$_SESSION['user'] = $row["user"];
+	    		$_SESSION['registered'] = true;
+	    		// Weiterleitung zur geschützten Startseite
+	    		if ($_SERVER['SERVER_PROTOCOL'] == 'HTTP/1.1') {
+	    			if (php_sapi_name() == 'cgi') {
+	    				header('Status: 303 See Other');
+	    			}
+	    			else {
+	    				header('HTTP/1.1 303 See Other');
+	    			}
+	    		}
+	    		header('Location: http://'.$hostname.($path == '/' ? '' : $path).'/index.php');
+	    		exit;
+	    	} else {
+	    		$message = "<font style='color: red;'>".$auth_failed_message."</font>";
+	    	}
+	    } else {
+	    	$message = "<font style='color: red;'>".$auth_failed_message."</font>";
+	    }
      }
 ?>
  
