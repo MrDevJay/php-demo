@@ -3,9 +3,15 @@ class Session{
 	
 	private $session_db;
 	
-	public function __construct(){
+	public function __construct($mysqli){
 		
-		$this->session_db = new Database;
+		$this->session_db = $mysqli;
+		
+		$this->session_db->query("CREATE TABLE IF NOT EXISTS sessions (
+				id varchar(32) NOT NULL,
+				access int(10) unsigned DEFAULT NULL,
+				data text,
+				PRIMARY KEY (id))");
 		
 		session_set_save_handler(
 			array($this, "_open"),
@@ -15,7 +21,6 @@ class Session{
 			array($this, "_destroy"),
 			array($this, "_gc")
 		);
-		
 		session_start();
 	}
 	
@@ -51,18 +56,16 @@ class Session{
 	 */
 	public function _read($id){
 		// Set query
-		$this->session_db->query('SELECT data FROM sessions WHERE id = :id');
-		 
-		// Bind the Id
-		$this->session_db->bind(':id', $id);
-	
+		$query = 'SELECT data FROM sessions WHERE id = ?';
+		$stmt = $this->session_db->prepare($query);
+		$stmt->bind_param('s', $id);
+
 		// Attempt execution
 		// If successful
-		if($this->session_db->execute()){
-			// Save returned row
-			$row = $this->session_db->single();
-			// Return the data
-			return $row['data'];
+		if($stmt->execute()){
+			$stmt->bind_result($col1);
+			$stmt->fetch();
+			return $col1;
 		}else{
 			// Return an empty string
 			return '';
@@ -77,16 +80,13 @@ class Session{
 		$access = time();
 		 
 		// Set query
-		$this->session_db->query('REPLACE INTO sessions VALUES (:id, :access, :data)');
-		 
-		// Bind data
-		$this->session_db->bind(':id', $id);
-		$this->session_db->bind(':access', $access);
-		$this->session_db->bind(':data', $data);
+		$query = 'REPLACE INTO sessions VALUES (?, ?, ?)';
+		$stmt = $this->session_db->prepare($query);
+		$stmt->bind_param('sis', $id, $access, $data);
 	
 		// Attempt Execution
 		// If successful
-		if($this->session_db->execute()){
+		if($stmt->execute()){
 			// Return True
 			return true;
 		}
@@ -100,14 +100,13 @@ class Session{
 	 */
 	public function _destroy($id){
 		// Set query
-		$this->session_db->query('DELETE FROM sessions WHERE id = :id');
-		 
-		// Bind data
-		$this->session_db->bind(':id', $id);
-		 
+		$query = 'DELETE FROM sessions WHERE id = ?';
+		$stmt = $this->session_db->prepare($query);
+		$stmt->bind_param('s', $id);
+
 		// Attempt execution
 		// If successful
-		if($this->session_db->execute()){
+		if($this->execute()){
 			// Return True
 			return true;
 		}
@@ -124,13 +123,12 @@ class Session{
 		$old = time() - $max;
 	
 		// Set query
-		$this->session_db->query('DELETE * FROM sessions WHERE access < :old');
-		 
-		// Bind data
-		$this->session_db->bind(':old', $old);
-		 
+		$query = 'DELETE * FROM sessions WHERE access < ?';
+		$stmt = $this->session_db->prepare($query);
+		$stmt->bind_param('i', $old);
+
 		// Attempt execution
-		if($this->session_db->execute()){
+		if($stmt->execute()){
 			// Return True
 			return true;
 		}
