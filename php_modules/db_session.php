@@ -106,7 +106,7 @@ class Session{
 
 		// Attempt execution
 		// If successful
-		if($this->execute()){
+		if($stmt->execute()){
 			// Return True
 			return true;
 		}
