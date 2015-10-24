@@ -16,8 +16,8 @@
 	//login form send
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	
-	    $benutzername = $_POST['benutzername'];
-	    $passwort = $_POST['passwort'];
+	    $benutzername = $_POST['username'];
+	    $passwort = $_POST['password'];
 	    //redirect
 	    $hostname = $_SERVER['HTTP_HOST'];
 	    $path = dirname($_SERVER['PHP_SELF']);
@@ -62,10 +62,10 @@
 				<form action="login.php" method="post">
 	   				<table spacing="10" style="margin:auto;">
 	   				  <tr>
-   				  		<td align="right">Benutzername:</td><td align="left"><input type="text" name="benutzername" size="25" onclick="setHeaderMessage('<?php echo $welcome_message?>')"/></td>
+   				  		<td align="right">Benutzername:</td><td align="left"><input type="text" name="username" size="25" onclick="setHeaderMessage('<?php echo $welcome_message?>')"/></td>
 	   				  </tr>
 	   				  <tr>
-   				  		<td align="right">Passwort:</td><td align="left"><input type="password" name="passwort" size="25" onclick="setHeaderMessage('<?php echo $welcome_message?>')"/></td>
+   				  		<td align="right">Passwort:</td><td align="left"><input type="password" name="password" size="25" onclick="setHeaderMessage('<?php echo $welcome_message?>')"/></td>
 	   				  </tr>
 	   				</table>
 	   				<p align="center"><input type="submit" value="Anmelden" /></p>
