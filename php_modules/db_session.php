@@ -21,6 +21,7 @@ class Session{
 			array($this, "_destroy"),
 			array($this, "_gc")
 		);
+		register_shutdown_function('session_write_close');
 		session_start();
 	}
 	
@@ -28,12 +29,9 @@ class Session{
 	 * Open
 	 */
 	public function _open(){
-		// If successful
 		if($this->session_db){
-			// Return True
 			return true;
 		}
-		// Return False
 		return false;
 	}
 	
@@ -41,13 +39,9 @@ class Session{
 	 * Close
 	 */
 	public function _close(){
-		// Close the database connection
-		// If successful
 		if($this->session_db->close()){
-			// Return True
 			return true;
 		}
-		// Return False
 		return false;
 	}
 	
@@ -55,19 +49,14 @@ class Session{
 	 * Read
 	 */
 	public function _read($id){
-		// Set query
 		$query = 'SELECT data FROM sessions WHERE id = ?';
 		$stmt = $this->session_db->prepare($query);
 		$stmt->bind_param('s', $id);
-
-		// Attempt execution
-		// If successful
 		if($stmt->execute()){
 			$stmt->bind_result($col1);
 			$stmt->fetch();
 			return $col1;
 		}else{
-			// Return an empty string
 			return '';
 		}
 	}
@@ -76,22 +65,13 @@ class Session{
 	 * Write
 	 */
 	public function _write($id, $data){
-		// Create time stamp
 		$access = time();
-		 
-		// Set query
 		$query = 'REPLACE INTO sessions VALUES (?, ?, ?)';
 		$stmt = $this->session_db->prepare($query);
 		$stmt->bind_param('sis', $id, $access, $data);
-	
-		// Attempt Execution
-		// If successful
 		if($stmt->execute()){
-			// Return True
 			return true;
 		}
-		 
-		// Return False
 		return false;
 	}
 	
@@ -99,19 +79,12 @@ class Session{
 	 * Destroy
 	 */
 	public function _destroy($id){
-		// Set query
 		$query = 'DELETE FROM sessions WHERE id = ?';
 		$stmt = $this->session_db->prepare($query);
 		$stmt->bind_param('s', $id);
-
-		// Attempt execution
-		// If successful
 		if($stmt->execute()){
-			// Return True
 			return true;
 		}
-	
-		// Return False
 		return false;
 	}
 	
@@ -119,21 +92,13 @@ class Session{
 	 * Garbage Collection
 	 */
 	public function _gc($max){
-		// Calculate what is to be deemed old
-		$old = time() - $max;
-	
-		// Set query
-		$query = 'DELETE * FROM sessions WHERE access < ?';
+		$old = time()-$max;
+		$query = 'DELETE FROM sessions WHERE access < ?';
 		$stmt = $this->session_db->prepare($query);
 		$stmt->bind_param('i', $old);
-
-		// Attempt execution
 		if($stmt->execute()){
-			// Return True
 			return true;
 		}
-	
-		// Return False
 		return false;
 	}
 }
