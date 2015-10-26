@@ -1,10 +1,11 @@
 <?php
 
-$mysql_host = "localhost";
-$mysql_user = "root";
-$mysql_password = "root";
-$mysql_database = "phpdemo";
+DEFINE("MYSQL_HOST","localhost");
+DEFINE("MYSQL_USER", "root");
+DEFINE("MYSQL_PASSWORD", "root");
+DEFINE("MYSQL_DATABASE", "phpdemo");
 
-$mysql_table_users = "users";
+DEFINE("MYSQL_TABLE_USERS", "users");
+
 
 ?>

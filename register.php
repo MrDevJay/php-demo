@@ -1,34 +1,35 @@
 <?php
 	
 	//includes
-	include_once ('php_modules/config.php');
+	include_once ('common.php');
+	//include_once ('php_modules/config.php');
 	include_once ('php_modules/db_connection.php');
 
 	include_once 'html_modules/header.php';
 	include_once 'html_modules/javascripts.php';
 	
 	//generals
-	$message = $register_message;
+	$message = $lang['REGISTER_WELCOME_MESSAGE'];
 		
 	//login form send
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	
-	    $benutzername = $_POST['benutzername'];
-	    $passwort = $_POST['passwort'];
-	    $passwortWdh = $_POST['passwortWdh'];
+	    $username = $_POST['username'];
+	    $password = $_POST['password'];
+	    $passwordR = $_POST['passwordR'];
 	    
 	    //redirect
 	    $hostname = $_SERVER['HTTP_HOST'];
 	    $path = dirname($_SERVER['PHP_SELF']);
 	
 	    //some verifications
-	    $sql_user_exists = "SELECT * FROM ".$mysql_table_users." WHERE user='".$benutzername."'";
+	    $sql_user_exists = "SELECT * FROM ".$mysql_table_users." WHERE user='".$username."'";
 	    $user_exists = $mysqli->query($sql_user_exists);
-	    if ($benutzername=="" || $passwort=="" || $passwortWdh=="" || $passwort != $passwortWdh){
-	    	$message = "<font style='color: red;'>".$invalid_registration_message."</font>";
+	    if ($username=="" || $password=="" || $passwordR=="" || $password != $passwordR){
+	    	$message = "<font style='color: red;'>".$lang['REGISTER_INVALID_MESSAGE']."</font>";
 	    } else if ($user_exists->num_rows > 0){
-	    	$message = "<font style='color: red;'>".str_replace("%s", $benutzername, $user_already_exists_message)."</font>";
-	    	$benutzername = "";
+	    	$message = "<font style='color: red;'>".str_replace("%s", $username, $lang['REGISTER_USER_ALREADY_EXISTS_MESSAGE'])."</font>";
+	    	$username = "";
 	    } else {
 	    	//create tables if not exist
 	    	$sql_create_table = "CREATE TABLE IF NOT EXISTS ".$mysql_table_users." (
@@ -41,13 +42,12 @@
 	    		//TODO improve error handling (separate page?)
 	    		die("Error creating database table: " . mysqli_error());
 	    	}
-	    	$passwordHash = sha1($passwort);
-	    	$sql_insert_new_user = "INSERT INTO ".$mysql_table_users." (user, password) VALUES ('".$benutzername."','".$passwordHash."')";
+	    	$passwordHash = sha1($password);
+	    	$sql_insert_new_user = "INSERT INTO ".$mysql_table_users." (user, password) VALUES ('".$username."','".$passwordHash."')";
 	    	if (!$mysqli->query($sql_insert_new_user)) {
 	    		//TODO improve error handling (separate page?)
 	    		die("Error inserting new user into database: " . mysqli_error());
 	    	}	 
-		    // Weiterleitung zur geschützten Startseite
 	       	if ($_SERVER['SERVER_PROTOCOL'] == 'HTTP/1.1') {
 	        	if (php_sapi_name() == 'cgi') {
 	         		header('Status: 303 See Other');
@@ -56,7 +56,7 @@
 	        		header('HTTP/1.1 303 See Other');
 	        	}
 	     	}
-	     	header('Location: http://'.$hostname.($path == '/' ? '' : $path).'/login.php?message='.$registered_message.'');
+	     	header('Location: http://'.$hostname.($path == '/' ? '' : $path).'/login.php?message='.$lang['REGISTER_SUCCESS_MESSAGE'].'');
 	    }	
      }
 ?>
@@ -71,18 +71,18 @@
 				<form action="register.php" method="post">
 	   				<table spacing="10" style="margin:auto;">
 	   				  <tr>
-   				  		<td align="right">Benutzername:</td><td align="left"><input type="text" id="reg_benutzername" name="benutzername" value="<?php echo $benutzername?>" size="25" onclick="setHeaderMessage('<?php echo $register_message?>')"/></td>
+   				  		<td align="right"><?php echo $lang['REGISTER_USERNAME'];?>:</td><td align="left"><input type="text" id="reg_benutzername" name="username" value="<?php echo $username?>" size="25" onclick="setHeaderMessage('<?php echo $register_message?>')"/></td>
 	   				  </tr>
 	   				  <tr>
-   				  		<td align="right">Passwort:</td><td align="left"><input type="password" id="reg_passwort" name="passwort" value="" size="25" onclick="setHeaderMessage('<?php echo $register_message?>')"/></td>
+   				  		<td align="right"><?php echo $lang['REGISTER_PASSWORD'];?>:</td><td align="left"><input type="password" id="reg_passwort" name="password" value="" size="25" onclick="setHeaderMessage('<?php echo $register_message?>')"/></td>
 	   				  </tr>
 	   				  <tr>
-   				  		<td align="right">Passwort (Wdh.):</td><td align="left"><input type="password" id="reg_passwortWdh" name="passwortWdh" value="" size="25" onclick="setHeaderMessage('<?php echo $register_message?>')"/></td>
+   				  		<td align="right"><?php echo $lang['REGISTER_PASSWORD_REPEAT']?>:</td><td align="left"><input type="password" id="reg_passwortWdh" name="passwordR" value="" size="25" onclick="setHeaderMessage('<?php echo $register_message?>')"/></td>
 	   				  </tr>
 	   				</table>
 	   				<p align="center"><input type="submit" value="Registrieren" /></p>
 	  			</form>
-	  			<p align="center" style="font-size:smaller;">Bereits registriert? Zurück zum <a href="login.php">login</a>.</p>
+	  			<p align="center" style="font-size:smaller;"><?php echo $lang['REGISTER_ALREADY_REGISTERED_MESSAGE']?> <a href="login.php">login</a>.</p>
 			</div>
 		</div>
 	</div>

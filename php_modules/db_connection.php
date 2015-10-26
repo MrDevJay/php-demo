@@ -2,6 +2,12 @@
 
 include_once ('db_config.php');
 
+$mysql_host = MYSQL_HOST;
+$mysql_user = MYSQL_USER;
+$mysql_password = MYSQL_PASSWORD;
+$mysql_database = MYSQL_DATABASE;
+$mysql_table_users = MYSQL_TABLE_USERS;
+
 //create database object
 $mysqli = new mysqli($mysql_host, $mysql_user, $mysql_password);
 if (mysqli_connect_errno($mysqli)) {

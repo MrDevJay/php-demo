@@ -1,4 +1,5 @@
 <?php 
+	include 'common.php';
 	include 'php_modules/auth.php';
 	include 'html_modules/header.php'; 
 ?>
@@ -10,7 +11,7 @@
 				<div style="width: 600px; height:400px">	
 					<?php include_once 'menu.php';?>	
 					
-					<p style='text-align:center;'>Willkommen auf der PHP-Demo-Seite, <?php echo $_SESSION["user"]?>.</p>
+					<p style='text-align:center;'><?php echo $lang['WELCOME_MESSAGE']; echo $_SESSION["username"]?>.</p>
 				</div>	
 			</div>
 		</div>

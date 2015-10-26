@@ -3,7 +3,7 @@
 	include_once 'db_session.php';     
 
     new Session($mysqli);
-    
+   
     $hostname = $_SERVER['HTTP_HOST'];
     $path = dirname($_SERVER['PHP_SELF']);
 
