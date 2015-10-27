@@ -3,7 +3,7 @@
 	if(isSet($_GET['lang'])){
 		$lang = $_GET['lang'];
 		// register the session and set the cookie
-		$_SESSION['lang'] = $lang;
+		//$_SESSION['lang'] = $lang;
 		setcookie('lang', $lang, time() + (3600 * 24 * 30));
 	} else if(isSet($_SESSION['lang'])){
 		$lang = $_SESSION['lang'];
@@ -17,16 +17,12 @@
 		case 'en':
 			$lang_file = 'lang.en.php';
 			break;
-	
 		case 'de':
 			$lang_file = 'lang.de.php';
 			break;
-	
 		default:
 			$lang_file = 'lang.en.php';
-	
-	}
-	
+	}	
 	include_once 'languages/'.$lang_file;
 
 ?>

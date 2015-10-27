@@ -2,7 +2,6 @@
 	
 	//includes
 	include_once ('common.php');
-	//include_once ('php_modules/config.php');
 	include_once ('php_modules/db_connection.php');
 
 	include_once 'html_modules/header.php';
@@ -70,13 +69,13 @@
 				<form action="register.php" method="post">
 	   				<table spacing="10" style="margin:auto;">
 	   				  <tr>
-   				  		<td align="right"><?php echo $lang['REGISTER_USERNAME'];?>:</td><td align="left"><input type="text" id="reg_benutzername" name="username" value="<?php echo $username?>" size="25" onclick="setHeaderMessage('<?php echo $register_message?>')"/></td>
+   				  		<td align="right"><?php echo $lang['REGISTER_USERNAME'];?>:</td><td align="left"><input type="text" id="reg_benutzername" name="username" value="<?php echo $username?>" size="25" onclick="setHeaderMessage('<?php echo $lang['REGISTER_WELCOME_MESSAGE']?>')"/></td>
 	   				  </tr>
 	   				  <tr>
-   				  		<td align="right"><?php echo $lang['REGISTER_PASSWORD'];?>:</td><td align="left"><input type="password" id="reg_passwort" name="password" value="" size="25" onclick="setHeaderMessage('<?php echo $register_message?>')"/></td>
+   				  		<td align="right"><?php echo $lang['REGISTER_PASSWORD'];?>:</td><td align="left"><input type="password" id="reg_passwort" name="password" value="" size="25" onclick="setHeaderMessage('<?php echo $lang['REGISTER_WELCOME_MESSAGE']?>')"/></td>
 	   				  </tr>
 	   				  <tr>
-   				  		<td align="right"><?php echo $lang['REGISTER_PASSWORD_REPEAT']?>:</td><td align="left"><input type="password" id="reg_passwortWdh" name="passwordR" value="" size="25" onclick="setHeaderMessage('<?php echo $register_message?>')"/></td>
+   				  		<td align="right"><?php echo $lang['REGISTER_PASSWORD_REPEAT']?>:</td><td align="left"><input type="password" id="reg_passwortWdh" name="passwordR" value="" size="25" onclick="setHeaderMessage('<?php echo $lang['REGISTER_WELCOME_MESSAGE']?>')"/></td>
 	   				  </tr>
 	   				</table>
 	   				<p align="center"><input type="submit" value="Registrieren" /></p>

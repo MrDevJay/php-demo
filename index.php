@@ -1,6 +1,8 @@
 <?php 
 	include 'common.php';
 	include 'php_modules/auth.php';
+	include 'php_modules/show_logged_in.php';
+	include 'php_modules/db_connection.php';
 	include 'html_modules/header.php'; 
 ?>
  
@@ -11,6 +13,15 @@
 					<?php include_once 'menu.php';?>	
 					
 					<p style='text-align:center;'><?php echo $lang['WELCOME_MESSAGE']; echo $_SESSION["username"]?>.</p>
+					<p style='text-align:center;'>
+						<?php 
+							echo $lang['ONLINE_USERS'].":<br>";
+							$online_users=get_online_users($mysqli);
+							for($i=0; $i<sizeof($online_users); $i++){
+								echo $online_users[$i]."<br>";
+							}
+						?>
+					</p>
 				</div>	
 			</div>
 		</div>

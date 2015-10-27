@@ -26,5 +26,6 @@ $lang['REGISTER_PASSWORD'] = 'Password';
 $lang['REGISTER_PASSWORD_REPEAT'] = 'Password (Rep.)';
 $lang['REGISTER_ALREADY_REGISTERED_MESSAGE'] = 'Already registered? Back to ';
 
+$lang['ONLINE_USERS'] = 'Online-Users';
 
 ?>

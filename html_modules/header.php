@@ -11,6 +11,6 @@
   //redirect
   $hostname = $_SERVER['HTTP_HOST'];
   $path = $_SERVER['PHP_SELF'];
-  echo "<div id='language_div'><a href='http://".$hostname.$path."?lang=de' class='img_link'><img src='images/Germany.png' alt='D' width='15px'></a>
-  		<a href='http://".$hostname.$path."?lang=en' class='img_link'><img src='images/United States.png' alt='E' width='15px'></a></div>";
+  echo "<div id='language_div'><a href='http://".$hostname.$path."?lang=de' class='img_link'><img src='images/Germany.png' alt='D' width='18px'></a>
+  		<a href='http://".$hostname.$path."?lang=en' class='img_link'><img src='images/United States.png' alt='E' width='18px'></a></div>";
 ?>  
