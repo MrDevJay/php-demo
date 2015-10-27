@@ -60,13 +60,12 @@
 	    }	
      }
 ?>
- 
-<body>
+
 <div class="container">
 	<div class="val">
 		<div class="hal">
 			<div>
-				<p class="pheader"><?php echo $page_title?></p>
+				<p class="pheader"><?php echo $lang['PAGE_TITLE']; ?></p>
 				<p id="message_text"><?php echo $message?></p>
 				<form action="register.php" method="post">
 	   				<table spacing="10" style="margin:auto;">
@@ -87,5 +86,6 @@
 		</div>
 	</div>
 </div>
-</body>
-</html>
+<?php 
+	include_once 'bottom.php';
+?>

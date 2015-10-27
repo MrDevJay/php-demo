@@ -8,6 +8,9 @@ a:hover {
 	color: tomato;
 	background-color: lightgrey;
 }
+a.img_link:hover {
+	background-color: white;
+}
 a:active {
 	color: tomato;
 	background-color: lightgrey;
@@ -50,4 +53,11 @@ td.headline{
 	text-align: center;
 	font-size:smaller;
 	color: black;
+}
+
+#language_div{
+	float: right;
+	margin: 10px;
+	position: relative;
+	z-index: 10;
 }

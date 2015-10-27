@@ -50,7 +50,6 @@
      }
 ?>
  
-<body>
 <div class="container">
 	<div class="val">
 		<div class="hal">
@@ -73,5 +72,6 @@
 		</div>
 	</div>
 </div>
-</body>
-</html>
+<?php 
+	include_once 'bottom.php';
+?>
