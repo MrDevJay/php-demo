@@ -8,6 +8,7 @@
 	include_once 'html_modules/javascripts.php';
 	
 	//generals
+	$username = "";
 	$message = $lang['REGISTER_WELCOME_MESSAGE'];
 		
 	//login form send
@@ -86,5 +87,5 @@
 	</div>
 </div>
 <?php 
-	include_once 'bottom.php';
+	include_once 'html_modules/bottom.php';
 ?>

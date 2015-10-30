@@ -4,7 +4,7 @@
 		<html xmlns='http://www.w3.org/1999/xhtml' xml:lang='de' lang='de'>
   		<head>
   		<meta http-equiv='content-type' content='text/html; charset=UTF-8'>
-  		<title>".$page_title."</title>
+  		<title>".$lang['PAGE_TITLE']."</title>
   		<link rel='stylesheet' type='text/css' href='css/style.css'>
  		</head>
   		<body>";

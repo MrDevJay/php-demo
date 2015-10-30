@@ -1,8 +1,8 @@
 <?php 
+	include 'php_modules/db_connection.php';
 	include 'common.php';
 	include 'php_modules/auth.php';
 	include 'php_modules/show_logged_in.php';
-	include 'php_modules/db_connection.php';
 	include 'html_modules/header.php'; 
 ?>
  
@@ -27,5 +27,5 @@
 		</div>
 	</div>
 <?php 
-	include_once 'bottom.php';
+	include_once 'html_modules/bottom.php';
 ?>

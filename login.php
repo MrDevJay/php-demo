@@ -73,5 +73,5 @@
 	</div>
 </div>
 <?php 
-	include_once 'bottom.php';
+	include_once 'html_modules/bottom.php';
 ?>

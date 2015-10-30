@@ -15,14 +15,25 @@
 		
 		$sql_current_sessions = "SELECT id, data FROM sessions";
 		$result = $mysqli->query($sql_current_sessions);
+		$j = 0;
 		
-		$online_users = array($result->num_rows);
 		for($i=0; $i < $result->num_rows; $i++) {
 			$row = $result->fetch_assoc();
-			$session_data_array = unserialize_session_data($row["data"]);
-			$online_users[$i] = $session_data_array['username'];
+			if ($row["data"] != ""){
+				$j++;
+			}
 		}
-		$mysqli->close();
+		$online_users = array($j);
+		$sql_current_sessions = "SELECT id, data FROM sessions";
+		$result = $mysqli->query($sql_current_sessions);
+		for($i=0; $i < $result->num_rows; $i++) {
+			$row = $result->fetch_assoc();
+			if ($row["data"] != ""){
+				$session_data_array = unserialize_session_data($row["data"]);
+				$online_users[$j-1] = $session_data_array['username'];
+				$j = $j-1;
+			}
+		}
 		return $online_users;
 	}
 	
