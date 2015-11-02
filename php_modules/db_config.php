@@ -6,6 +6,7 @@ DEFINE("MYSQL_PASSWORD", "");
 DEFINE("MYSQL_DATABASE", "phpdemo");
 
 DEFINE("MYSQL_TABLE_USERS", "users");
+DEFINE("MYSQL_TABLE_SESSIONS", "sessions");
 
 
 ?>

@@ -1,6 +1,6 @@
 <?php
 
-	include_once ('db_config.php');
+	include_once 'db_config.php';
 
 	$mysql_host = MYSQL_HOST;
 	$mysql_user = MYSQL_USER;

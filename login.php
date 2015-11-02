@@ -1,6 +1,7 @@
 <?php
 	include_once 'common.php';
 	
+	include_once 'php_modules/db_config.php';
 	include_once 'php_modules/db_connection.php';
 	include_once 'php_modules/db_session.php';
 
@@ -27,7 +28,7 @@
 	    if ($username!="" && $password!="" && $result->num_rows==1){
 	    	$row = $result->fetch_assoc();
 	    	if ($row["password"] == sha1($password)){
-	    		new Session($mysqli);
+	    		new Session($mysqli, MYSQL_TABLE_SESSIONS);
 	    		$_SESSION['id'] = $row["id"];
 	    		$_SESSION['username'] = $row["user"];
 	    		$_SESSION['registered'] = true;

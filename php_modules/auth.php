@@ -1,8 +1,9 @@
 <?php
+	include_once 'db_config.php';
 	include_once 'db_connection.php';
 	include_once 'db_session.php';     
 
-	new Session($mysqli);
+	new Session($mysqli, MYSQL_TABLE_SESSIONS);
    
 	$hostname = $_SERVER['HTTP_HOST'];
 	$path = dirname($_SERVER['PHP_SELF']);
