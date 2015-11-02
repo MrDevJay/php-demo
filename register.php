@@ -1,8 +1,8 @@
 <?php
 	
 	//includes
-	include_once ('common.php');
-	include_once ('php_modules/db_connection.php');
+	include_once 'common.php';
+	include_once 'php_modules/db_connection.php';
 
 	include_once 'html_modules/header.php';
 	include_once 'html_modules/javascripts.php';

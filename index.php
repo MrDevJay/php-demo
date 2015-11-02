@@ -1,9 +1,9 @@
 <?php 
-	include 'php_modules/db_connection.php';
-	include 'common.php';
-	include 'php_modules/auth.php';
-	include 'php_modules/show_logged_in.php';
-	include 'html_modules/header.php'; 
+	include_once 'php_modules/db_connection.php';
+	include_once 'common.php';
+	include_once 'php_modules/auth.php';
+	include_once 'php_modules/show_logged_in.php';
+	include_once 'html_modules/header.php'; 
 ?>
  
 	 <div class="container">

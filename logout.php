@@ -1,7 +1,7 @@
 <?php
-	include_once ('common.php');
-	include_once ('php_modules/db_connection.php');
-	include_once ('php_modules/db_session.php');
+	include_once 'common.php';
+	include_once 'php_modules/db_connection.php';
+	include_once 'php_modules/db_session.php';
 	
 	new Session($mysqli);
 	
