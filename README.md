@@ -9,3 +9,5 @@ Simply modify php_modules/db_config.php with your values for
 - MYSQL_DATABASE
 and access your apllication.
 Database and tables will be created on the fly.
+
+
