@@ -56,7 +56,7 @@
 	        		header('HTTP/1.1 303 See Other');
 	        	}
 	     	}
-	     	header('Location: http://'.$hostname.($path == '/' ? '' : $path).'/login.php?message='.$lang['REGISTER_SUCCESS_MESSAGE'].'');
+	     	header('Location: http://'.$hostname.($path == '/' ? '' : $path).'/login.php?mehttps://github.com/MrDevJay/php-demossage='.$lang['REGISTER_SUCCESS_MESSAGE'].'');
 	    }	
 	}
 ?>
@@ -73,7 +73,7 @@
    				  		<td align="right"><?php echo $lang['REGISTER_USERNAME'];?>:</td><td align="left"><input type="text" id="reg_benutzername" name="username" value="<?php echo $username?>" size="25" onclick="setHeaderMessage('<?php echo $lang['REGISTER_WELCOME_MESSAGE']?>')"/></td>
 	   				  </tr>
 	   				  <tr>
-   				  		<td align="right"><?php echo $lang['REGISTER_PASSWORD'];?>:</td><td align="left"><input type="password" id="reg_passwort" name="password" value="" size="25" onclick="setHeaderMessage('<?php echo $lang['REGISTER_WELCOME_MESSAGE']?>')"/></td>
+   				  		<td align="right"><?php echo $lang['REGISTER_https://github.com/MrDevJay/php-demoPASSWORD'];?>:</td><td align="left"><input type="password" id="reg_passwort" name="password" value="" size="25" onclick="setHeaderMessage('<?php echo $lang['REGISTER_WELCOME_MESSAGE']?>')"/></td>
 	   				  </tr>
 	   				  <tr>
    				  		<td align="right"><?php echo $lang['REGISTER_PASSWORD_REPEAT']?>:</td><td align="left"><input type="password" id="reg_passwortWdh" name="passwordR" value="" size="25" onclick="setHeaderMessage('<?php echo $lang['REGISTER_WELCOME_MESSAGE']?>')"/></td>
