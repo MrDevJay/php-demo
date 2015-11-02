@@ -41,7 +41,7 @@
 	    	if (!$mysqli->query($sql_create_table)) {
 	    		//TODO improve error handling (separate page?)
 	    		die("Error creating database table: " . mysqli_error());
-	    	}
+	    		}
 	    	$passwordHash = sha1($password);
 	    	$sql_insert_new_user = "INSERT INTO ".$mysql_table_users." (user, password) VALUES ('".$username."','".$passwordHash."')";
 	    	if (!$mysqli->query($sql_insert_new_user)) {
@@ -58,7 +58,7 @@
 	     	}
 	     	header('Location: http://'.$hostname.($path == '/' ? '' : $path).'/login.php?message='.$lang['REGISTER_SUCCESS_MESSAGE'].'');
 	    }	
-     }
+	}
 ?>
 
 <div class="container">
